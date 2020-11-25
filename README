@@ -1,2 +1,4 @@
 mpei project
 
+To generate dataset run dataset_gen.py
+Then you can run main.py
