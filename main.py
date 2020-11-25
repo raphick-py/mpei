@@ -4,7 +4,7 @@ import os
 import sys
 
 
-def longest_commoni_substring(S, T):
+def longest_common_substring(S, T):
     m = len(S)
     n = len(T)
     counter = [[0]*(n+1) for x in range(m+1)]
