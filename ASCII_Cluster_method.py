@@ -37,28 +37,6 @@ def comparasion(ASCII):
     return residual
 
 
-#def improve_mask(residual, length):
-#    improve_residual = []
-#    index = 0
-#    join_iter = 0
-#    index_global = 0
-#    while (length - 1) != 0:
-#        for k in range(length):
-#            improve_residual.append(residual[index])
-#            index = index + 1
-#        if join_iter != 0:
-#            for i in range(join_iter):
-#                improve_residual.append(residual[index_global])
-#
-#
-#    for i in range(length):
-#        if join_iter != 0:
-#            for l in range(join_iter):
-#                improve_residual.append(residual[l])
-#        join_iter = join_iter + 1
-#    return improve_residual
-
-
 def normalization(ASCII_code):
     for item in ASCII_code:
         for index, character in enumerate(item):
@@ -104,11 +82,8 @@ if __name__ == "__main__":
     list_of_packet = [x[:-1] for x in list_of_packet]  # deleting \n character
     length = len(list_of_packet)
     ASCII_code = Convert_to_ASCII(list_of_packet)
-#    print(ASCII_code)
     res = comparasion(ASCII_code)
     normalize = normalization(res)
     mask = counter(normalize, length)
-#    print("======================")
     umask_ASCII = apply_mask(ASCII_code, mask)
-#    print("=======decode=============")
     print(Decode_from_ASCII(umask_ASCII))
