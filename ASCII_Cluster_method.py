@@ -58,7 +58,6 @@ def counter(ASCII_code, length):
         list_of = []
         for i in range(mass_len):
             list_of.append(sum(ASCII_code[i+start_k]))
-            print(start_k + i)
         if list_of:
             min_value = max(list_of)
             min_index = list_of.index(min_value)
