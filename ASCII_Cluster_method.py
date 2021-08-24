@@ -63,7 +63,6 @@ def counter(ASCII_code, length):
             min_index = list_of.index(min_value)
             result.append(ASCII_code[start_k+min_index])
             m = i
-            print(list_of)
         length = length - 1
     return result
 
