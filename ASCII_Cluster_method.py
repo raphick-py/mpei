@@ -26,12 +26,37 @@ def Decode_from_ASCII(ASCII):
 def comparasion(ASCII):
     residual = list()
     ASCII_code = ASCII.copy()
-    while len(ASCII_code) != 0:
-        comp = ASCII_code[0]
+    index = 0
+    while (len(ASCII) - index) != 0:
+        comp = ASCII[index]
         ASCII_code.pop(0)
         for item in ASCII_code:
-             residual.append([x - y for x, y in zip(comp, item)])
+            residual.append([x - y for x, y in zip(comp, item)])
+        ASCII_code.append(comp)
+        index = index + 1
     return residual
+
+
+#def improve_mask(residual, length):
+#    improve_residual = []
+#    index = 0
+#    join_iter = 0
+#    index_global = 0
+#    while (length - 1) != 0:
+#        for k in range(length):
+#            improve_residual.append(residual[index])
+#            index = index + 1
+#        if join_iter != 0:
+#            for i in range(join_iter):
+#                improve_residual.append(residual[index_global])
+#
+#
+#    for i in range(length):
+#        if join_iter != 0:
+#            for l in range(join_iter):
+#                improve_residual.append(residual[l])
+#        join_iter = join_iter + 1
+#    return improve_residual
 
 
 def normalization(ASCII_code):
@@ -47,25 +72,28 @@ def normalization(ASCII_code):
 def counter(ASCII_code, length):
     result = list()
     i = 0
-    m = 0
+    m = -1
+    start_k = 0
+    mass_len = length - 1
     while length != 0:
-        start_k = m
+        start_k = start_k + m + 1
         list_of = []
-        for i in range(length-1):
-            list_of.append(sum(ASCII_code[i]))
+        for i in range(mass_len):
+            list_of.append(sum(ASCII_code[i+start_k]))
+            print(start_k + i)
         if list_of:
             min_value = max(list_of)
             min_index = list_of.index(min_value)
             result.append(ASCII_code[start_k+min_index])
             m = i
+            print(list_of)
         length = length - 1
     return result
 
 
 def apply_mask(ASCII_code, mask):
     for k in range(len(ASCII_code)):
-        ASCII_code[k] = [a*b for a, b in zip(list(map(int, ASCII_code[k])), mask[k-1])]
-        print("==========",ASCII_code)
+        ASCII_code[k] = [a*b for a, b in zip(list(map(int, ASCII_code[k])), mask[k])]
         ASCII_code[k] = [i for i in ASCII_code[k] if i != 0]
     return ASCII_code
 
@@ -78,11 +106,9 @@ if __name__ == "__main__":
     ASCII_code = Convert_to_ASCII(list_of_packet)
 #    print(ASCII_code)
     res = comparasion(ASCII_code)
-#    print(res)
     normalize = normalization(res)
-#    print(normalize)
     mask = counter(normalize, length)
-#    print("========mask=============")
+#    print("======================")
     umask_ASCII = apply_mask(ASCII_code, mask)
 #    print("=======decode=============")
     print(Decode_from_ASCII(umask_ASCII))
