@@ -1,6 +1,6 @@
 #!/usr/bin/python
 import re
-
+import lcs
 
 def find_sum(str1):
     return sum(map(int, re.findall(('\d+', str1))))
@@ -84,4 +84,10 @@ if __name__ == "__main__":
     normalize = normalization(res)
     mask = counter(normalize, length)
     umask_ASCII = apply_mask(ASCII_code, mask)
-    print(Decode_from_ASCII(umask_ASCII))
+    end = Decode_from_ASCII(umask_ASCII)
+    print(end)
+    lcs_test = lcs.label_determine(end)
+    end = lcs.label_pop(lcs_test, end)
+    print(end)
+    lcs_test = lcs.label_determine(end)
+    print(lcs_test)
